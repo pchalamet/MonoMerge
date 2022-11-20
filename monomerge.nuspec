@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>monomerge</id>
+    <version>0.0.0</version>
+    <title>monomerge</title>
+    <authors>Pierre Chalamet</authors>
+    <owners>Pierre Chalamet</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>MonoMerge</description>
+  </metadata>
+  <files>
+    <file src="monomerge\bin\$configuration$\*.*" target="tools" />
+  </files>
+</package>

@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<OutputType>Exe</OutputType>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="Examples\repository.yaml"/>
+		<None Include="Examples\master.yaml"/>
+		<Compile Include="Helpers\Threading.fs"/>
+		<Compile Include="Helpers\IO.fs"/>
+		<Compile Include="Helpers\Fs.fs"/>
+		<Compile Include="Helpers\Env.fs"/>
+		<Compile Include="Helpers\Exec.fs"/>
+		<Compile Include="Helpers\Console.fs"/>
+		<Compile Include="Helpers\Collections.fs"/>
+		<Compile Include="Helpers\Algorithm.fs"/>
+		<Compile Include="Helpers\Text.fs"/>
+		<Compile Include="Helpers\Xml.fs"/>
+		<Compile Include="Configuration\Master.fs"/>
+		<Compile Include="Configuration\Manifest.fs"/>
+		<Compile Include="Tools\Git.fs"/>
+		<Compile Include="CLI\Commands.fs"/>
+		<Compile Include="CLI\CommandLine.fs"/>
+		<Compile Include="Commands\Workspace.fs"/>
+		<Compile Include="Commands\Help.fs"/>
+		<None Include="App.config"/>
+		<Compile Include="AssemblyInfo.fs"/>
+		<Compile Include="Program.fs"/>
+		<Content Include="monomerge.sh">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="YamlDotNet" Version="11.2.1"/>
+		<PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0"/>
+	</ItemGroup>
+</Project>
