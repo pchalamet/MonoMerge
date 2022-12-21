@@ -30,6 +30,10 @@ let Clone (repo : Configuration.Master.Repository) (wsDir : DirectoryInfo) (shal
     let args = sprintf @"clone --recurse-submodules %s %s %s %A" repo.Uri br depth targetDir.FullName
     Exec "git" args wsDir Map.empty
 
+let Init (wsDir: DirectoryInfo) =
+    let args = sprintf "init %A" wsDir.FullName
+    Exec "git" args wsDir Map.empty
+
 let Checkout (branch: string) (wsDir: DirectoryInfo) =
     let chkVersionArgs = $"checkout {branch}" 
     Exec "git" chkVersionArgs wsDir Map.empty

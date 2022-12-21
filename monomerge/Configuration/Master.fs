@@ -23,8 +23,7 @@ with
         this.Repositories |> Seq.tryFind (fun x -> x.Name = name)
 
 
-let Load (wsDir : DirectoryInfo) =
-    let masterConfigFile = wsDir |> GetFile "sbs.yaml"
+let Load (masterConfigFile : FileInfo) =
     let yaml = System.IO.File.ReadAllText(masterConfigFile.FullName)
     let deserializer = DeserializerBuilder().Build()
     let config = deserializer.Deserialize<Configuration>(yaml)

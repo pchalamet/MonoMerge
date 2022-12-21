@@ -12,20 +12,17 @@ let Init (cmd : CLI.Commands.InitWorkspace) =
         if isWorkspaceNotEmpty then failwithf "Workspace already exists"
         wsDir |> EnsureExists |> ignore
 
-        // first clone master repository
-        let masterUri = cmd.Uri
-        let masterRepo = { Configuration.Master.Repository.Name = ""
-                           Configuration.Master.Repository.Uri = masterUri
-                           Configuration.Master.Repository.Branch = "main" }
-        Tools.Git.Clone masterRepo wsDir false None |> CheckResponseCode
-
-    wsDir |> Tools.Git.Checkout "main" |> CheckResponseCode
+        // initialize repository
+        Tools.Git.Init wsDir |> CheckResponseCode
+        wsDir |> GetFile "README.md" |> WriteAllLines [ "# MonoMerge migration" ]
+        Tools.Git.Add "." wsDir |> CheckResponseCode
+        Tools.Git.Commit "migration" wsDir |> CheckResponseCode
 
     let currentDir = System.Environment.CurrentDirectory
     try
         System.Environment.CurrentDirectory <- wsDir.FullName
 
-        let master = Configuration.Master.Load wsDir
+        let master = Configuration.Master.Load (cmd.ConfigFile |> FileInfo)
         for repository in master.Repositories do
             let targetFolder = wsDir |> GetDirectory repository.Name
             if targetFolder.Exists |> not then

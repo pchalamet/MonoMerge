@@ -33,3 +33,5 @@ let CurrentDir () =
 let ReadAllText (fileName : FileInfo) =
     fileName.FullName |> File.ReadAllText
 
+let WriteAllLines (lines: string seq) (fileName : FileInfo) =
+    File.WriteAllLines(fileName.FullName, lines) 

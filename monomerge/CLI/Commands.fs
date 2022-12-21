@@ -2,7 +2,7 @@
 
 type InitWorkspace =
     { Path : string 
-      Uri : string
+      ConfigFile : string
       Continue: bool }
 
 [<RequireQualifiedAccess>]

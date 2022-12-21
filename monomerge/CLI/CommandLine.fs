@@ -42,8 +42,8 @@ let private commandUsage args =
 let rec private commandInit cont args =
     match args with
     | TokenOption Continue :: tail -> tail |> commandInit true
-    | [Param path; Param uri]
-        -> Command.Init { Path = path; Uri = uri; Continue = cont }
+    | [Param configFile; Param path]
+        -> Command.Init { ConfigFile = configFile; Path = path; Continue = cont }
     | _ -> Command.Error MainCommand.Init
 
 let Parse (args : string list) : Command =
