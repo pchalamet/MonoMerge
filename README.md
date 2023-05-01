@@ -1,6 +1,6 @@
 # Monomerge
 Monomerge is a tool to merge several GIT repositories into a single mono-repository.
-All History is preserved on main branch.
+All History is preserved on specified branch.
 
 # How to build
 make
@@ -20,7 +20,9 @@ The repository must contains the `sbs.yaml` (in root) file describing all availa
 ````
 repositories:
     - name: sbs                                                                                  
-      uri: git@git@github.com:pchalamet/SmartBuildSystem.git                
+      uri: git@git@github.com:pchalamet/SmartBuildSystem.git
+      branch: main
     - name: npolybool                                                                                              
-      uri: git@github.com:pchalamet/NPolyBool.git                                  
+      uri: git@github.com:pchalamet/NPolyBool.git
+      branch: master
 ````
