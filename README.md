@@ -1,3 +1,7 @@
+# Monomerge
+Monomerge is a tool to merge several GIT repositories into a single mono-repository.
+All History is preserved on main branch.
+
 # How to build
 make
 
