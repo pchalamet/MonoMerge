@@ -4,8 +4,8 @@ Monomerge consolidates all specified GIT repositories into a single one, while p
 # How to build
 `make` is required to build and publish.
 
-* `make [build]`: build application
-* `make [publish]`: build & publish application in `out` folder
+* `make [build]`: build application (default action)
+* `make publish`: build & publish application in `out` folder
 
 # Configuration
 Create a new repository, it's required to initialize a new workspace. This repository will be used to discover configuration. All repositories will be added to this one.
