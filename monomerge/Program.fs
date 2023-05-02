@@ -6,6 +6,7 @@ let processMain argv =
     let cmd = CLI.CommandLine.Parse (argv |> Seq.toList)
     match cmd with
     | Command.Init info -> Commands.Workspace.Init info; 0
+    | Command.Convert info -> Commands.Workspace.Convert info; 0
     | Command.Usage -> Commands.Help.Usage MainCommand.Unknown; 0
     | Command.Error info -> Commands.Help.Usage info; 5
     | Command.Version -> Commands.Help.Version (); 0

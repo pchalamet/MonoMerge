@@ -15,3 +15,10 @@ publish: build
 
 	dotnet publish -c $(config) -r linux-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true --self-contained -o $(PWD)/out/linux monomerge
 	cd out/linux; zip -r ../linux.zip ./*
+
+init:
+	rm -rf /Users/pierre/src/tessan/teleconsultation
+	cd monomerge; dotnet run -- init /Users/pierre/src/tessan/teleconsultation git@github.com:tessan-tech/teleconsultation.git
+
+convert:
+	cd monomerge; dotnet run -- convert /Users/pierre/src/tessan/teleconsultation

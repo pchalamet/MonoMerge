@@ -2,8 +2,10 @@
 
 type InitWorkspace =
     { Path : string 
-      ConfigFile : string
-      Continue: bool }
+      Url : string }
+
+type ConvertWorkspace =
+    { Path : string }
 
 [<RequireQualifiedAccess>]
 type MainCommand =
@@ -16,4 +18,5 @@ type Command =
     | Version
     | Usage
     | Init of InitWorkspace
+    | Convert of ConvertWorkspace
     | Error of MainCommand

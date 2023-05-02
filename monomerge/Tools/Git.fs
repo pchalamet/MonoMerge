@@ -13,10 +13,10 @@ type private Branch =
     | Named of string
 
 
-let Clone (repo : Configuration.Master.Repository) (wsDir : DirectoryInfo) (shallow : bool) (branch : string option) =
+let Clone (uri : string) (targetDir : DirectoryInfo) (shallow : bool) (branch : string option) =
     let gitBranch = match branch with
-                    | Some name -> let chkBranchArgs = sprintf "ls-remote --exit-code --heads %s %s" repo.Uri name
-                                   match ExecGetOutput "git" chkBranchArgs wsDir Map.empty |> IsError with
+                    | Some name -> let chkBranchArgs = sprintf "ls-remote --exit-code --heads %s %s" uri name
+                                   match ExecGetOutput "git" chkBranchArgs targetDir Map.empty |> IsError with
                                    | true -> Branch.Default
                                    | false -> Branch.Named name
                     | None -> Branch.None
@@ -26,9 +26,8 @@ let Clone (repo : Configuration.Master.Repository) (wsDir : DirectoryInfo) (shal
              | Branch.Default -> "--single-branch"
              | Branch.Named name -> sprintf "--branch %s --single-branch" name
     let depth = shallow ? ("--depth=1", "")
-    let targetDir = wsDir |> GetDirectory repo.Name
-    let args = sprintf @"clone --recurse-submodules %s %s %s %A" repo.Uri br depth targetDir.FullName
-    Exec "git" args wsDir Map.empty
+    let args = sprintf @"clone --recurse-submodules %s %s %s %A" uri br depth targetDir.FullName
+    Exec "git" args targetDir Map.empty
 
 let Init (wsDir: DirectoryInfo) =
     let args = sprintf "init %A" wsDir.FullName

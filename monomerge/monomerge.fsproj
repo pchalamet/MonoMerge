@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<OutputType>Exe</OutputType>
 	</PropertyGroup>
 	<ItemGroup>
@@ -17,7 +17,6 @@
 		<Compile Include="Helpers\Text.fs"/>
 		<Compile Include="Helpers\Xml.fs"/>
 		<Compile Include="Configuration\Master.fs"/>
-		<Compile Include="Configuration\Manifest.fs"/>
 		<Compile Include="Tools\Git.fs"/>
 		<Compile Include="CLI\Commands.fs"/>
 		<Compile Include="CLI\CommandLine.fs"/>

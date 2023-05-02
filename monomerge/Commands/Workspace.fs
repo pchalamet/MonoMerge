@@ -6,23 +6,20 @@ open Helpers.IO
 
 let Init (cmd : CLI.Commands.InitWorkspace) =
     let wsDir = cmd.Path |> DirectoryInfo
-    if cmd.Continue |> not then
-        let isWorkspaceNotEmpty = wsDir.Exists 
-                                && (wsDir.EnumerateFiles().Count() > 0 || wsDir.EnumerateDirectories().Count() > 0)
-        if isWorkspaceNotEmpty then failwithf "Workspace already exists"
-        wsDir |> EnsureExists |> ignore
+    let isWorkspaceNotEmpty = wsDir.Exists 
+                            && (wsDir.EnumerateFiles().Count() > 0 || wsDir.EnumerateDirectories().Count() > 0)
+    if isWorkspaceNotEmpty then failwithf "Workspace already exists"
+    wsDir |> EnsureExists |> ignore
 
-        // initialize repository
-        Tools.Git.Init wsDir |> CheckResponseCode
-        wsDir |> GetFile "README.md" |> WriteAllLines [ "# MonoMerge migration" ]
-        Tools.Git.Add "." wsDir |> CheckResponseCode
-        Tools.Git.Commit "migration" wsDir |> CheckResponseCode
+    Tools.Git.Clone cmd.Url wsDir false None |> CheckResponseCode
 
+let Convert (cmd : CLI.Commands.ConvertWorkspace) =
+    let wsDir = cmd.Path |> DirectoryInfo
     let currentDir = System.Environment.CurrentDirectory
     try
         System.Environment.CurrentDirectory <- wsDir.FullName
 
-        let master = Configuration.Master.Load (cmd.ConfigFile |> FileInfo)
+        let master = Configuration.Master.Load ("sbs.yaml" |> FileInfo)
         for repository in master.Repositories do
             let targetFolder = wsDir |> GetDirectory repository.Name
             if targetFolder.Exists |> not then
